@@ -5,13 +5,25 @@ import java.util.List;
 
 public class Node {
 
+	private String className;
+	private ClassFloor classFloor;
 	private List<Edge> edges;
 	private int idNode;
 
-	public Node() {
+	public Node(String className, ClassFloor classFloor, int idNode) {
+		assert (className != null);
+		assert (classFloor != null);
+		assert (idNode > 0);
+
+		this.className = className;
+		this.classFloor = classFloor;
+		this.idNode = idNode;
 		this.edges = new ArrayList<Edge>();
 
 		assert (this.edges != null);
+		assert (this.classFloor.equals(classFloor));
+		assert (this.className.equals(className));
+		assert (this.idNode == idNode);
 	}
 
 	public boolean hasEdges() {
@@ -48,6 +60,22 @@ public class Node {
 		this.idNode = idNode;
 
 		assert (this.idNode == idNode);
+	}
+
+	public String getClassName() {
+		return className;
+	}
+
+	public void setClassName(String className) {
+		this.className = className;
+	}
+
+	public ClassFloor getClassFloor() {
+		return classFloor;
+	}
+
+	public void setClassFloor(ClassFloor classFloor) {
+		this.classFloor = classFloor;
 	}
 
 }

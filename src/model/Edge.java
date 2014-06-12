@@ -5,30 +5,23 @@ public class Edge {
 	private Node whoFrom;
 	private Node whoTo;
 	private float distance;
-	private RoadType roadType;
-	private boolean hasLights;
+	
 
-	public Edge(String streetName, Node whoFrom, Node whoTo, float distance,
-			RoadType roadType, boolean hasLights) {
+	public Edge(String streetName, Node whoFrom, Node whoTo, float distance) {
 		assert (streetName != null);
 		assert (whoFrom != null);
 		assert (whoTo != null);
 		assert (distance > 0);
-		assert (roadType != null);
 
 		this.streetName = streetName;
 		this.whoFrom = whoFrom;
 		this.whoTo = whoTo;
 		this.distance = distance;
-		this.roadType = roadType;
-		this.hasLights = hasLights;
 
 		assert (this.streetName.equals(streetName));
 		assert (this.whoFrom.equals(whoFrom));
 		assert (this.whoTo.equals(whoTo));
 		assert (this.distance == distance);
-		assert (this.roadType.equals(roadType));
-		assert (this.hasLights == hasLights);
 	}
 
 	public String getStreetName() {
@@ -61,22 +54,6 @@ public class Edge {
 
 	public void setDistance(float distance) {
 		this.distance = distance;
-	}
-
-	public RoadType getRoadType() {
-		return roadType;
-	}
-
-	public void setRoadType(RoadType roadType) {
-		this.roadType = roadType;
-	}
-
-	public boolean hasLights() {
-		return hasLights;
-	}
-
-	public void setHasLights(boolean hasLights) {
-		this.hasLights = hasLights;
 	}
 
 }

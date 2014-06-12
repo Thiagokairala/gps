@@ -14,7 +14,7 @@ public class TestNode {
 
 	@Before
 	public void setUp() {
-		this.node = new Node();
+		this.node = new Node("name of the class", ClassFloor.FIRST_FLOOR, 1);
 	}
 
 	@Test

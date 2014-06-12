@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<graph>
+	<node>
+		<className>I1</className>
+		<classFloor>1</classFloor>
+		<idNode>1</idNode>
+	</node>
+
+	<node>
+		<className>I2</className>
+		<classFloor>1</classFloor>
+		<idNode>2</idNode>
+	</node>
+
+	<node>
+		<className>I3</className>
+		<classFloor>1</classFloor>
+		<idNode>3</idNode>
+	</node>
+
+	<node>
+		<className>I4</className>
+		<classFloor>1</classFloor>
+		<idNode>4</idNode>
+	</node>
+
+	<node>
+		<className>I5</className>
+		<classFloor>1</classFloor>
+		<idNode>5</idNode>
+	</node>
+
+	<node>
+		<className>I6</className>
+		<classFloor>1</classFloor>
+		<idNode>6</idNode>
+	</node>
+
+	<node>
+		<className>I7</className>
+		<classFloor>1</classFloor>
+		<idNode>7</idNode>
+	</node>
+
+	<node>
+		<className>I8</className>
+		<classFloor>1</classFloor>
+		<idNode>8</idNode>
+	</node>
+
+	<node>
+		<className>I9</className>
+		<classFloor>1</classFloor>
+		<idNode>9</idNode>
+	</node>
+
+	<node>
+		<className>Auditorium</className>
+		<classFloor>3</classFloor>
+		<idNode>10</idNode>
+	</node>
+
+	<node>
+		<className>Auditorium</className>
+		<classFloor>3</classFloor>
+		<idNode>10</idNode>
+	</node>
+
+	<node>
+		<className>Coffee House</className>
+		<classFloor>1</classFloor>
+		<idNode>11</idNode>
+	</node>
+
+	<node>
+		<className>Secretary</className>
+		<classFloor>1</classFloor>
+		<idNode>12</idNode>
+	</node>
+
+	<node>
+		<className>Secretary Bathroom</className>
+		<classFloor>1</classFloor>
+		<idNode>13</idNode>
+	</node>
+
+	<node>
+		<className>Lab Down Bathroom</className>
+		<classFloor>1</classFloor>
+		<idNode>14</idNode>
+	</node>
+
+	<node>
+		<className>Coffe House</className>
+		<classFloor>1</classFloor>
+		<idNode>15</idNode>
+	</node>
+
+	<node>
+		<className>Secretary Stairs Down</className>
+		<classFloor>1</classFloor>
+		<idNode>16</idNode>
+	</node>
+
+	<node>
+		<className>Secretary Stairs Up</className>
+		<classFloor>2</classFloor>
+		<idNode>17</idNode>
+	</node>
+
+	<node>
+		<className>Lab Stairs Down</className>
+		<classFloor>1</classFloor>
+		<idNode>18</idNode>
+	</node>
+
+	<node>
+		<className>Lab Stairs Up</className>
+		<classFloor>2</classFloor>
+		<idNode>19</idNode>
+	</node>
+
+	<node>
+		<className>Amphi Theater</className>
+		<classFloor>1</classFloor>
+		<idNode>20</idNode>
+	</node>
+</graph>
