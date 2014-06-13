@@ -1,7 +1,7 @@
 package model;
 
 public enum ClassFloor {
-	FIRST_FLOOR(1), SECOND_FLOOR(2), FIRST_SECOND_FLOOR(3);
+	FIRST_FLOOR(1), SECOND_FLOOR(2);
 
 	private int floor;
 

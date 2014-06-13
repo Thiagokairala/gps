@@ -23,14 +23,19 @@ public class Init {
 		Graph graph = new Graph();
 
 		Document document = Init.getDocument();
+		document.getDocumentElement().normalize();
 
 		graph = Init.populateNodes(graph, document);
+		graph = Init.populateEdges(graph, document);
+		return graph;
+	}
 
+	private static Graph populateEdges(Graph graph, Document document) {
+		// TODO Auto-generated method stub
 		return graph;
 	}
 
 	private static Graph populateNodes(Graph graph, Document document) {
-		document.getDocumentElement().normalize();
 
 		NodeList graphNodesXML = document.getElementsByTagName("node");
 
@@ -58,8 +63,6 @@ public class Init {
 			return ClassFloor.FIRST_FLOOR;
 		case 2:
 			return ClassFloor.SECOND_FLOOR;
-		case 3:
-			return ClassFloor.FIRST_SECOND_FLOOR;
 		default:
 			return null;
 		}
