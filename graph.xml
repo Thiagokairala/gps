@@ -383,13 +383,6 @@
 	</edge>
 
 	<edge>
-		<whoFrom>2</whoFrom>
-		<whoTo>3</whoTo>
-		<distance>20</distance>
-		<idEdge>20</idEdge>
-	</edge>
-
-	<edge>
 		<whoFrom>5</whoFrom>
 		<whoTo>20</whoTo>
 		<distance>35</distance>
@@ -984,5 +977,26 @@
 		<whoTo>40</whoTo>
 		<distance>8</distance>
 		<idEdge>104</idEdge>
+	</edge>
+
+	<edge>
+		<whoFrom>5</whoFrom>
+		<whoTo>35</whoTo>
+		<distance>25</distance>
+		<idEdge>105</idEdge>
+	</edge>
+
+	<edge>
+		<whoFrom>20</whoFrom>
+		<whoTo>21</whoTo>
+		<distance>5</distance>
+		<idEdge>106</idEdge>
+	</edge>
+
+	<edge>
+		<whoFrom>21</whoFrom>
+		<whoTo>20</whoTo>
+		<distance>5</distance>
+		<idEdge>107</idEdge>
 	</edge>
 </graph>

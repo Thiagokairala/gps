@@ -8,6 +8,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import model.ClassFloor;
+import model.Edge;
 import model.Graph;
 import model.Node;
 
@@ -27,15 +28,63 @@ public class Init {
 
 		graph = Init.populateNodes(graph, document);
 		graph = Init.populateEdges(graph, document);
+
 		return graph;
 	}
 
-	private static Graph populateEdges(Graph graph, Document document) {
-		// TODO Auto-generated method stub
+	private static Graph populateEdges(Graph graph, final Document document) {
+		assert (graph != null);
+		assert (graph != document);
+
+		NodeList graphEdgesXML = document.getElementsByTagName("edge");
+
+		for (int i = 0; i < graphEdgesXML.getLength(); i++) {
+			Element node = (Element) graphEdgesXML.item(i);
+
+			final int whoFrom = Integer.parseInt(node
+					.getElementsByTagName("whoFrom").item(0).getTextContent());
+			final int whoTo = Integer.parseInt(node
+					.getElementsByTagName("whoTo").item(0).getTextContent());
+
+			final float distance = Float.parseFloat(node
+					.getElementsByTagName("distance").item(0).getTextContent());
+
+			final int idEdge = Integer.parseInt(node
+					.getElementsByTagName("idEdge").item(0).getTextContent());
+
+			int positionOfNodeFrom = Init.findPosition(graph, whoFrom);
+			int positionOfNodeTo = Init.findPosition(graph, whoTo);
+
+			Node nodeFrom = graph.getNodes().get(positionOfNodeFrom);
+			Node nodeTo = graph.getNodes().get(positionOfNodeTo);
+
+			Edge edge = new Edge(nodeFrom, nodeTo, distance, idEdge);
+
+			graph.getNodes().get(positionOfNodeFrom).getEdges().add(edge);
+		}
+
 		return graph;
 	}
 
-	private static Graph populateNodes(Graph graph, Document document) {
+	private static int findPosition(final Graph graph, final int whoFrom) {
+		assert (graph != null);
+		assert (whoFrom > 0);
+
+		int i = 0;
+
+		while (i < graph.getNodes().size()
+				&& graph.getNodes().get(i).getIdNode() != whoFrom) {
+			i++;
+		}
+
+		assert (i < graph.getNodes().size());
+		return i;
+	}
+
+	private static Graph populateNodes(Graph graph, final Document document) {
+
+		assert (graph != null);
+		assert (document != null);
 
 		NodeList graphNodesXML = document.getElementsByTagName("node");
 
@@ -58,6 +107,8 @@ public class Init {
 	}
 
 	private static ClassFloor getFloor(final int floor) {
+		assert (floor > 0);
+		assert (floor <= 2);
 		switch (floor) {
 		case 1:
 			return ClassFloor.FIRST_FLOOR;
@@ -79,6 +130,7 @@ public class Init {
 
 		Document document = documentBuilder.parse(new File("graph.xml"));
 
+		assert (document != null);
 		return document;
 
 	}
