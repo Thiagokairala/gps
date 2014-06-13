@@ -1,35 +1,22 @@
 package model;
 
 public class Edge {
-	private String streetName;
 	private Node whoFrom;
 	private Node whoTo;
 	private float distance;
-	
 
-	public Edge(String streetName, Node whoFrom, Node whoTo, float distance) {
-		assert (streetName != null);
+	public Edge(Node whoFrom, Node whoTo, float distance) {
 		assert (whoFrom != null);
 		assert (whoTo != null);
 		assert (distance > 0);
 
-		this.streetName = streetName;
 		this.whoFrom = whoFrom;
 		this.whoTo = whoTo;
 		this.distance = distance;
 
-		assert (this.streetName.equals(streetName));
 		assert (this.whoFrom.equals(whoFrom));
 		assert (this.whoTo.equals(whoTo));
 		assert (this.distance == distance);
-	}
-
-	public String getStreetName() {
-		return streetName;
-	}
-
-	public void setStreetName(String streetName) {
-		this.streetName = streetName;
 	}
 
 	public Node getWhoFrom() {
