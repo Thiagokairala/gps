@@ -2,7 +2,7 @@ package control;
 
 import model.Heap;
 import model.HeapNode;
-
+import exception.EmptyHeapException;
 import exception.FoundRootException;
 import exception.InvalidNodeException;
 
@@ -27,6 +27,92 @@ public class HeapControl {
 		} else {
 			throw new InvalidNodeException();
 		}
+	}
+
+	public HeapNode removeFromHeap() throws EmptyHeapException {
+		if (this.getHeap().isEmpty()) {
+			this.putHeadInLast();
+			HeapNode smaller = this.removeLast();
+
+			return smaller;
+		} else {
+			throw new EmptyHeapException();
+		}
+
+	}
+
+	private HeapNode removeLast() {
+		final int FIRST_POSITION = 1;
+		final int lastPosition = this.getHeap().getHeapSize() - 1;
+		HeapNode last = this.getHeap().getHeap()[lastPosition];
+
+		this.shrinkHeap();
+		this.heapify(FIRST_POSITION);
+
+		return last;
+	}
+
+	private void heapify(final int parent) {
+		final int leftChild = parent * 2;
+		final int rightChild = parent * 2 + 1;
+
+		if (leftChild < this.getHeap().getHeapSize()) {
+			final float parentDistance = this.getHeap().getHeap()[parent]
+					.getDistance();
+
+			final int smallerChildren = this.findSmallerDistanceChildren(
+					leftChild, rightChild);
+
+			final float smallerChildrenDistance = this.getHeap().getHeap()[smallerChildren]
+					.getDistance();
+
+			if (smallerChildren < parentDistance) {
+				this.swap(smallerChildren, parent);
+				this.heapify(smallerChildren);
+			} else {
+				// stops the recursion.
+			}
+		} else {
+			// stops the recursion.
+		}
+	}
+
+	private int findSmallerDistanceChildren(int leftChild, int rightChild) {
+		final float leftChildrenDistance = this.getHeap().getHeap()[leftChild]
+				.getDistance();
+		final float rightChildrenDistance = rightChild < this.getHeap()
+				.getHeapSize() ? this.getHeap().getHeap()[rightChild]
+				.getDistance() : -1;
+		int smallerChildren = 0;
+
+		if (rightChildrenDistance == -1) {
+			smallerChildren = leftChild;
+		} else {
+			smallerChildren = leftChildrenDistance < rightChildrenDistance ? leftChild
+					: rightChild;
+		}
+
+		return smallerChildren;
+	}
+
+	private void shrinkHeap() {
+		final int size = this.getHeap().getHeapSize();
+		final int newSize = size - 1;
+
+		HeapNode[] newHeap = new HeapNode[newSize];
+
+		System.arraycopy(this.getHeap().getHeap(), 0, newHeap, 0, newSize);
+
+		this.getHeap().setHeap(newHeap);
+
+	}
+
+	private void putHeadInLast() {
+		final int head = 1;
+		final int lastPosition = this.getHeap().getHeapSize() - 1;
+
+		this.swap(head, lastPosition);
+
 	}
 
 	/**
@@ -80,46 +166,14 @@ public class HeapControl {
 		}
 	}
 
-	private void checkChildrens(final int node) {
-
-		final int leftChildren = node * 2;
-		final int rightChildren = leftChildren + 1;
-
-		// checking the left children.
-		try {
-			this.checkOneChildren(leftChildren, node);
-		} catch (ArrayIndexOutOfBoundsException e) {
-			// nothing to do.
-		}
-		// checking the right children.
-		try {
-			this.checkOneChildren(rightChildren, node);
-		} catch (ArrayIndexOutOfBoundsException e) {
-			// nothing to do.
-		}
-	}
-
-	private void checkOneChildren(final int children, final int parent)
-			throws ArrayIndexOutOfBoundsException {
-		boolean isInHeap = children < this.getHeap().getHeapSize();
-
-		if (isInHeap) {
-			HeapNode childrenHeapNode = this.getHeap().getHeap()[children];
-			HeapNode parentHeapNode = this.getHeap().getHeap()[parent];
-
-			if (childrenHeapNode.getDistance() < parentHeapNode.getDistance()) {
-				this.swap(children, parent);
-			} else {
-				// nothing to do.
-			}
-			assert (this.getHeap().getHeap()[children].getDistance() > this
-					.getHeap().getHeap()[parent].getDistance());
-		} else {
-			throw new ArrayIndexOutOfBoundsException();
-		}
-
-	}
-
+	/**
+	 * This method exchange 2 items on heap.
+	 * 
+	 * @param firstElement
+	 *            must be bigger then the second.
+	 * @param secondElement
+	 *            must be smaller then the first.
+	 */
 	private void swap(final int firstElement, final int secondElement) {
 		assert (firstElement > 0);
 		assert (secondElement > 0);

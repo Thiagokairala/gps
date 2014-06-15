@@ -20,4 +20,10 @@ public class Heap {
 	public int getHeapSize() {
 		return this.heap.length;
 	}
+
+	public boolean isEmpty() {
+		boolean isEmpty = this.heap.length > 1 ? false : true;
+
+		return isEmpty;
+	}
 }
