@@ -1,5 +1,6 @@
 package control;
 
+import model.Edge;
 import model.Heap;
 import model.HeapNode;
 import exception.EmptyHeapException;
@@ -17,7 +18,7 @@ public class HeapControl {
      */
     public void insertOnHeap(HeapNode nodeToInsert) throws InvalidNodeException {
 	final boolean isValid = nodeToInsert != null
-		&& nodeToInsert.getDistance() != 0
+		&& nodeToInsert.getDistance() >= 0
 		&& nodeToInsert.getEdgeUsed() != null
 		&& nodeToInsert.getNode() != null;
 
@@ -244,5 +245,21 @@ public class HeapControl {
 
     public void setHeap(Heap heap) {
 	this.heap = heap;
+    }
+
+    public void updateNodeDistance(float distance, int positionOnHeap,
+	    Edge edgeUsed) {
+	assert (positionOnHeap < this.getHeap().getHeapSize());
+	assert (distance >= 0);
+	assert (positionOnHeap > 0);
+
+	if (this.getHeap().getHeap()[positionOnHeap].getDistance() > distance) {
+	    this.getHeap().getHeap()[positionOnHeap].setDistance(distance);
+	    this.getHeap().getHeap()[positionOnHeap].setEdgeUsed(edgeUsed);
+	    this.shiftUp(positionOnHeap);
+	} else {
+	    // nothing to do.
+	}
+
     }
 }
