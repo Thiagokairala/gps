@@ -36,7 +36,7 @@ public class HeapControl {
      * @throws EmptyHeapException
      */
     public HeapNode removeFromHeap() throws EmptyHeapException {
-	if (this.getHeap().isEmpty()) {
+	if (!this.getHeap().isEmpty()) {
 	    this.putHeadInLast();
 	    HeapNode smaller = this.removeLast();
 

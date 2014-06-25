@@ -3,11 +3,11 @@ package control;
 import java.util.ArrayList;
 import java.util.List;
 
-import exception.EmptyHeapException;
-import exception.InvalidNodeException;
 import model.Edge;
 import model.HeapNode;
 import model.Node;
+import exception.EmptyHeapException;
+import exception.InvalidNodeException;
 
 public class GraphControl {
     private List<HeapNode> exploredNodes = new ArrayList<HeapNode>();
@@ -16,22 +16,55 @@ public class GraphControl {
 
     public List<HeapNode> findSmallerPath(Node nodeFrom, Node nodeTo)
 	    throws InvalidNodeException, EmptyHeapException {
+	List<HeapNode> exploredNodes = this.getExploredNodesList(nodeFrom,
+		nodeTo);
 
+	List<HeapNode> smallerPath = this.getSmallerPath(exploredNodes);
+
+	return smallerPath;
+    }
+
+    private List<HeapNode> getSmallerPath(List<HeapNode> exploredNodes) {
+	List<HeapNode> smallerPath = new ArrayList<HeapNode>();
+	final int listSize = exploredNodes.size();
+	smallerPath.add(exploredNodes.get(listSize - 1));
+
+	Edge edgeUsed = smallerPath.get(0).getEdgeUsed();
+
+	int i = listSize - 1;
+	while (!edgeUsed.getWhoFrom().equals(exploredNodes.get(0).getNode())) {
+	    Node nodeFrom = edgeUsed.getWhoFrom();
+
+	    while (!exploredNodes.get(i).getNode().equals(nodeFrom)) {
+		i--;
+	    }
+
+	    smallerPath.add(exploredNodes.get(i));
+	    edgeUsed = exploredNodes.get(i).getEdgeUsed();
+	}
+	smallerPath.add(exploredNodes.get(0));
+
+	return smallerPath;
+    }
+
+    private List<HeapNode> getExploredNodesList(Node nodeFrom, Node nodeTo)
+	    throws InvalidNodeException, EmptyHeapException {
+	List<HeapNode> exploredNodes = new ArrayList<HeapNode>();
 	HeapNode exploringNode = this.createFirstHeapNode(nodeFrom);
+
 	HeapControl heapControl = new HeapControl();
-	nodeFrom.setPositionOnHeap(EXPLORED);
-	this.putNodeFromOnExploredList(nodeFrom);
+	heapControl.insertOnHeap(exploringNode);
 
 	do {
-	    this.insertNeighborsOnHeap(exploringNode, heapControl);
-
 	    exploringNode = heapControl.removeFromHeap();
-	    exploringNode.getNode().setPositionOnHeap(this.EXPLORED);
-	    this.getExploredNodes().add(exploringNode);
 
-	} while (exploringNode.getNode().equals(nodeTo) != true);
+	    this.insertNeighborsOnHeap(exploringNode, heapControl);
+	    exploringNode.getNode().setPositionOnHeap(EXPLORED);
 
-	return null;
+	    exploredNodes.add(exploringNode);
+
+	} while (!exploringNode.getNode().equals(nodeTo));
+	return exploredNodes;
     }
 
     private void insertNeighborsOnHeap(HeapNode exploringNode,
